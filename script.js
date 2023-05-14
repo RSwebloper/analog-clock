@@ -1,34 +1,22 @@
+let hr =document.getElementById('hour');
+let min =document.getElementById('min');
+let sec =document.getElementById('sec');
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import LandingPage from './src/apps/landingpage';
-import Search from './src/apps/search';
-import PDP from './src/apps/pdp';
+function displayTime(){
+let date = new Date();
+//getting hour , min , sec , from date
 
-const RootNavigator = createStackNavigator(
-	{
-		Home: {
-			screen: LandingPage,
-			navigationOptions: () => ({
-				headerShown: false,
-			}),
-		},
-		Search: {
-			screen: Search,
-			navigationOptions: () => ({
-				title: 'Search',
-			}),
-		},
-		PDP: {
-			screen: PDP,
-			navigationOptions: () => ({
-				title: 'PDP',
-			}),
-		},
-	},
-	{
-		initialRouteName: 'Home',
-	}
-);
+let hh = date.getHours();
+let mm = date.getMinutes();
+let ss = date.getSeconds();
 
-export default createAppContainer(RootNavigator);
+let hRotation = 30*hh + mm/2;
+let mRotation = 6*mm;
+let sRotation = 6*ss;
+
+hr.style.transform = `rotate(${hRotation}deg)`;
+min.style.transform = `rotate(${mRotation}deg)`;
+sec.style.transform = `rotate(${sRotation}deg)`;
+}
+
+setInterval(displayTime , 1000);
